@@ -20,7 +20,5 @@ public class ClockScript : MonoBehaviour
     void Update()
     {
         currentTime.text = DateTime.Now.ToString();
-    }
-
-    
+    }    
 }

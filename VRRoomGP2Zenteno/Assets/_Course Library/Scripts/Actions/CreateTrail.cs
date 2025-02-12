@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
+using UnityEngine.UI;
 
 /// <summary>
 /// This script creates a trail at the location of a gameobject with a particular width and color.
@@ -7,11 +9,22 @@
 public class CreateTrail : MonoBehaviour
 {
     public GameObject trailPrefab = null;
+    public Transform spawnPoint = null;
+    public Button saveButton = null;
+    private List<GameObject> savedTrails = new List <GameObject>();
 
     private float width = 0.05f;
     private Color color = Color.white;
 
     private GameObject currentTrail = null;
+
+    public void Start()
+    {
+        if (saveButton != null)
+        {
+            saveButton.onClick.AddListener(SaveCreate);
+        }
+    }
 
     public void StartTrail()
     {
@@ -47,5 +60,16 @@ public class CreateTrail : MonoBehaviour
     public void SetColor(Color value)
     {
         color = value;
+    }
+
+    public void SaveCreate()
+    {
+        if (currentTrail)
+        {
+           GameObject savedTrail = Instantiate(currentTrail, spawnPoint.position, spawnPoint.rotation);
+           savedTrail.transform.SetParent(spawnPoint);
+           savedTrails.Add(savedTrail);
+           savedTrail.transform.parent = null;
+        }
     }
 }

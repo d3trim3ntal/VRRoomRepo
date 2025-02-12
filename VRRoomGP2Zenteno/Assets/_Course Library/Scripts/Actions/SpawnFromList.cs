@@ -18,6 +18,7 @@ public class SpawnFromList : MonoBehaviour
 
     private GameObject currentObject = null;
     private int index = 0;
+    public Transform platform;
 
     public void SpawnAtDropdownIndex(Dropdown dropdown)
     {
@@ -77,5 +78,13 @@ public class SpawnFromList : MonoBehaviour
     {
         if (!spawnPoint)
             spawnPoint = transform;
+    }
+
+    void Update()
+    {
+        if (platform != null && currentObject != null)
+        {
+            currentObject.transform.rotation = platform.rotation;
+        }
     }
 }
